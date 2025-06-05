@@ -8,8 +8,8 @@ import './LoginPage.css'
 
 
 export default function LoginPage() {
-    const [email, setEmail] = useState(null)
-    const [password, setPassword] = useState(null)
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
     const [showPassword, setShowPassword] = useState(false)
 
     const { login } = useAuth()
@@ -79,6 +79,7 @@ export default function LoginPage() {
                     </form>
                 </div>
             </div>
+            <Toaster />
         </div>
     )
 }
