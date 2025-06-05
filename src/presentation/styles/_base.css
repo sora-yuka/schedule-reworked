@@ -1,0 +1,23 @@
+
+
+html, body {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
+    background-color: var(--theme-light-background-secondary);
+}
+
+div::selection,
+h1::selection, 
+h2::selection, 
+h3::selection, 
+h4::selection, 
+h5::selection, 
+h6::selection,
+strong::selection,
+span::selection, 
+p::selection {
+    background-color: #000;
+    color: #fff;
+}
