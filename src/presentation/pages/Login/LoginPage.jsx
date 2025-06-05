@@ -56,14 +56,22 @@ export default function LoginPage() {
                         </div>
                         <div className="login__field">
                             <label htmlFor="password" className="login__label">Password</label>
-                            <input 
-                                id="password"
-                                type="password"
-                                placeholder="Enter your password"
-                                value={ password }
-                                className="login__input"
-                                onChange={ (event) => setPassword(event.target.value) }
-                            />
+                            <div className="login__field-password">
+                                <input 
+                                    id="password"
+                                    type={ !showPassword ? "password" : "text" }
+                                    placeholder="Enter your password"
+                                    value={ password }
+                                    className="login__input"
+                                    onChange={ (event) => setPassword(event.target.value) }
+                                />
+                                <img 
+                                    src={ !showPassword ? "/svg/eye-closed.svg" : "/svg/eye-opened.svg" } 
+                                    alt="" 
+                                    className="login__field-eye" 
+                                    onClick={ () => { setShowPassword(!showPassword) } } 
+                                />
+                            </div>
                         </div>
                         <Button className="button__primary">
                             Войти
