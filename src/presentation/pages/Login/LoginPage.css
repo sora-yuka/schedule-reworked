@@ -1,3 +1,62 @@
-.login-wrapper {
-    background-color: var(--primary-background-color);
+.login__wrapper {
+    height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+
+    background-image: url('/static/open-book-mockup.jpg');
+    background-position: 0%;
+}
+
+.login__container {
+    width: 30%;
+
+    color: var(--color);
+
+    border-left: 1px solid var(--border);
+    backdrop-filter: blur(5px);
+    background-color: rgba(0,0,0,0.4);
+}
+
+.login__panel {
+    height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.login__headline {
+    margin-bottom: 40px;
+
+    font-size: 40px;
+    font-weight: 700;
+}
+
+.login__form {
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+}
+
+.login__field {
+    margin-bottom: 25px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    font-weight: 600;
+}
+
+.login__input {
+    padding-bottom: 5px;
+    border-bottom: 1px solid var(--border);
+}
+
+.login__field:nth-child(2) {
+    margin-bottom: 50px;
 }

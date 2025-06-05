@@ -1,10 +1,14 @@
 :root {
     /* Background color variables */
     --theme-light-background-primary: #ffffff;
-    --theme-light-background-secondary: #fcfbfd;
+    --theme-light-background-secondary: #f8f8f8;
     --theme-light-border: #fcfbfd;
 
     /* --theme-dark-backgrould-primary: ; */
+
+    /* Common color variables */
+    --color: #ffffff;
+    --border: #aaaaaa;
 
     /* Button color variables */
     --button-border-default: #1a1a1a;
@@ -12,6 +16,5 @@
     --button-background-primary: #000000;
     --button-color-primary: #ffffff;
 
-    --button-background-secondary: #ffffff;
-    --button-hover-background-secodary: #f7f7f7;
+    --button-background-secondary: #f0f0f0;
 }

@@ -1,7 +1,7 @@
 import { useState, useCallback } from 'react'
 import { useAuth } from '../../contexts/authContext'
 import { useNavigate } from 'react-router-dom'
-import toast from 'react-hot-toast'
+import toast, { Toaster } from 'react-hot-toast'
 import Button from '../../components/ui/Button/Button.jsx'
 
 import './LoginPage.css'
@@ -38,8 +38,39 @@ export default function LoginPage() {
     })
 
     return (
-        <div className="login-wrapper">
-            <Button onClick={ handleSubmit }>toast example</Button>
+        <div className="login__wrapper">
+            <div className="login__container">
+                <div className="login__panel">
+                    <h2 className="login__headline">Welcome back</h2>
+                    <form className="login__form" onSubmit={ handleSubmit }>
+                        <div className="login__field">
+                            <label htmlFor="email" className="login__label">E-mail</label>
+                            <input 
+                                id="email"
+                                type="text"
+                                placeholder="Enter your e-mail"
+                                value={ email }
+                                className="login__input"
+                                onChange={ (event) => setEmail(event.target.value) }
+                            />
+                        </div>
+                        <div className="login__field">
+                            <label htmlFor="password" className="login__label">Password</label>
+                            <input 
+                                id="password"
+                                type="password"
+                                placeholder="Enter your password"
+                                value={ password }
+                                className="login__input"
+                                onChange={ (event) => setPassword(event.target.value) }
+                            />
+                        </div>
+                        <Button className="button__primary">
+                            Войти
+                        </Button>
+                    </form>
+                </div>
+            </div>
         </div>
     )
 }
