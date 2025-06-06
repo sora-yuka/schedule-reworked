@@ -1,14 +1,25 @@
 :root {
+    /* 
+    Variable naming
+    --class/attribute-property-primary/secondary/tertiary - special variables based on class or attribute
+    --property-primary/secondary/tertiary - for variaty of common variables
+    --property - for common variables
+    */
+
+    /* Most common variables */
+    --border: #AAAAAA;
+    --color-secondary: #CACACA;
+
     /* Background color variables */
-    --theme-light-background-primary: #ffffff;
-    --theme-light-background-secondary: #f8f8f8;
-    --theme-light-border: #fcfbfd;
+    --theme-light-background-primary: #FFFFFF;
+    --theme-light-background-secondary: #E1E8F0;
+    --theme-light-border: #FCFBFD;
 
-    /* --theme-dark-backgrould-primary: ; */
+    --theme-dark-background-primary: #2C2D30;
+    --theme-dark-background-secondary: #101010; 
 
-    /* Common color variables */
-    --color: #ffffff;
-    --border: #aaaaaa;
+    /* Font color variables */
+    --theme-light-color: #ffffff;
 
     /* Button color variables */
     --button-border-default: #1a1a1a;

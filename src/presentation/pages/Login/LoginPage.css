@@ -11,7 +11,7 @@
 .login__container {
     width: 35%;
 
-    color: var(--color);
+    color: var(--theme-light-color);
 
     border-left: 1px solid var(--border);
     backdrop-filter: blur(5px);
@@ -53,6 +53,10 @@
 .login__input {
     padding-bottom: 5px;
     border-bottom: 1px solid var(--border);
+}
+
+.login__input::placeholder {
+    color: var(--color-secondary);
 }
 
 .login__field:nth-child(2) {
