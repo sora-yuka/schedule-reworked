@@ -13,7 +13,7 @@ export default function App() {
         <BrowserRouter>
             <AuthProvider>
                 <Routes>
-                    <Route path="/" />
+                    <Route path="/" element={ <HomePage /> } />
                     <Route path="/login" element={ <LoginPage /> } />
                 </Routes>
             </AuthProvider>

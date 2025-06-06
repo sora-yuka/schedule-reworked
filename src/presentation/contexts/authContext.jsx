@@ -27,19 +27,19 @@ export const AuthProvider = ({ children }) => {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
-                    "Athorization": `Bearer ${secureStorage.getItem("access_token")}`,
+                    "Authorization": `Bearer ${secureStorage.getItem("access_token")}`,
                 }
             })
 
             if (response.status === HTTP_STATUS.UNAUTHORIZED) { 
-                const refresh = refresh()
+                const refreshResponse = await refresh()
 
-                if (refresh.status === HTTP_STATUS.BAD_REQUEST) {
+                if (refreshResponse.status === HTTP_STATUS.BAD_REQUEST) {
                     setIsAuthenticated(false)
                     navigate("/login")
-                } else {
-                    setIsAuthenticated(true)
                 }
+
+                setIsAuthenticated(true)
             }
 
             return response
@@ -55,8 +55,18 @@ export const AuthProvider = ({ children }) => {
             const response = await fetch(baseUrl + "refresh/", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ refresh_token }),
+                body: JSON.stringify({ "refresh": refresh_token }),
             })
+
+            if (response.status !== HTTP_STATUS.AUTHORIZED) {
+                setIsAuthenticated(false)
+                navigate("/login")
+            }
+
+            const data = await response.json()
+            secureStorage.setItem("access_token", data["access"])
+            secureStorage.setItem("refresh_token", data["refresh"])
+            setIsAuthenticated(true)
 
             return response
         } catch(error) {
@@ -71,6 +81,10 @@ export const AuthProvider = ({ children }) => {
             body: JSON.stringify({ email, password })
         })
 
+        const data = await response.json()
+        secureStorage.setItem("access_token", data["access"])
+        secureStorage.setItem("refresh_token", data["refresh"])
+
         return response
     }
 
@@ -78,7 +92,7 @@ export const AuthProvider = ({ children }) => {
         secureStorage.removeItem("access_token")
         secureStorage.removeItem("refresh_token")
         setIsAuthenticated(false)
-        navigate("/home")
+        navigate("/login")
     }
 
     return (
