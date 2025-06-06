@@ -2,7 +2,7 @@ import { useContext, createContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 const HTTP_STATUS = {
-    AUTHORIZED: 200,
+    OK: 200,
     UNAUTHORIZED: 401,
     BAD_REQUEST: 400,
 }
@@ -10,7 +10,7 @@ const HTTP_STATUS = {
 const AuthContext = createContext()
 
 export const AuthProvider = ({ children }) => {
-    const [isAuthenticated, setIsAuthenticated] = useState(false)
+    const [isAuthenticated, setIsAuthenticated] = useState(null)
     const navigate = useNavigate()
 
     const baseUrl = import.meta.env.VITE_API_ENDPOINT + "api/v1/account/"
@@ -23,30 +23,25 @@ export const AuthProvider = ({ children }) => {
 
     useEffect(() => {
         const checkAuth = async() => {
-            const response = await fetch(baseUrl + "check-auth/", {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${secureStorage.getItem("access_token")}`,
+            try {
+                const response = await fetch(baseUrl + "check-auth/", {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${secureStorage.getItem("access_token")}`,
+                    }
+                })
+    
+                if (response.status === HTTP_STATUS.UNAUTHORIZED) { 
+                    const refreshResponse = await refresh()
                 }
-            })
-
-            if (response.status === HTTP_STATUS.UNAUTHORIZED) { 
-                const refreshResponse = await refresh()
-
-                if (refreshResponse.status === HTTP_STATUS.BAD_REQUEST) {
-                    setIsAuthenticated(false)
-                    navigate("/login")
-                }
-
-                setIsAuthenticated(true)
+            } catch(error) {
+                console.error("Failed to check auth permissions: ", error)
             }
-
-            return response
         }
 
         checkAuth()
-    }, [ navigate ])
+    }, [ ])
 
     const refresh = async() => {
         try {
@@ -58,19 +53,18 @@ export const AuthProvider = ({ children }) => {
                 body: JSON.stringify({ "refresh": refresh_token }),
             })
 
-            if (response.status !== HTTP_STATUS.AUTHORIZED) {
+            if (response.status !== HTTP_STATUS.OK) {
                 setIsAuthenticated(false)
                 navigate("/login")
             }
 
             const data = await response.json()
             secureStorage.setItem("access_token", data["access"])
-            secureStorage.setItem("refresh_token", data["refresh"])
             setIsAuthenticated(true)
 
             return response
         } catch(error) {
-            throw error
+            console.error("Failed to refresh user token: ", error)
         }
     }
 
@@ -80,6 +74,10 @@ export const AuthProvider = ({ children }) => {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ email, password })
         })
+
+        if (response.status === HTTP_STATUS.BAD_REQUEST) {
+            throw new Error("User with given credentials not found.")
+        }
 
         const data = await response.json()
         secureStorage.setItem("access_token", data["access"])
