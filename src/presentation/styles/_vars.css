@@ -9,17 +9,19 @@
     /* Most common variables */
     --border: #AAAAAA;
     --color-secondary: #CACACA;
-
+    
     /* Background color variables */
     --theme-light-background-primary: #FFFFFF;
     --theme-light-background-secondary: #E1E8F0;
     --theme-light-border: #FCFBFD;
 
+    --theme-light-background-active-tab: #F4F4F4;
+
     --theme-dark-background-primary: #2C2D30;
     --theme-dark-background-secondary: #101010; 
 
     /* Font color variables */
-    --theme-light-color: #ffffff;
+    --theme-dark-color: #ffffff;
 
     /* Button color variables */
     --button-border-default: #1a1a1a;
@@ -28,4 +30,7 @@
     --button-color-primary: #ffffff;
 
     --button-background-secondary: #f0f0f0;
+
+    --toggle-theme-button-background-inactive: #CBCBCB;
+    --toggle-theme-button-background-active: #31CE3A;
 }

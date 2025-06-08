@@ -37,3 +37,16 @@
     box-shadow: none;
     transform: translateY(0);
 }
+
+.button__toggle-theme {
+    display: flex;
+    align-items: center;
+
+    font-weight: 600;
+    color: var(--color-secondary);
+}
+
+.button__toggle-theme::before {
+    content: url("/svg/sidebar/moon.svg");
+    margin-right: 10px;
+}
