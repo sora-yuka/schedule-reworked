@@ -1,26 +1,32 @@
-import { useState } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
+import { ThemeContext } from '../../../contexts/themeContext.jsx'
 import Button from '../../ui/Button/Button.jsx'
 
 import './Sidebar.css'
 
 
 export default function SidebarComponent() {
+    const { theme, toggleTheme } = useContext(ThemeContext)
+
     const tab = "sidebar__tab"
     const activeTab = "sidebar__tab--active"
-    const [checked, setChecked]  = useState(false)
+    const [checked, setChecked]  = useState(theme === "dark-theme")
 
-    const handleToggleButton = () => {
+    useEffect(() => {
+        setChecked(theme === "dark-theme")
+    }, [ ])
+
+    const buttonToggle = () => {
         setChecked(prevState => !prevState)
-        let mainWrapper = document.body.getElementsByClassName("main__wrapper")[0]
-        mainWrapper.classList.add("--dark-theme")
+        toggleTheme()
     }
 
     return (
         <div className="sidebar__wrapper">
             <div className="sidebar__container">
                 <div className="sidebar__logo">
-                    here might be your logo!
+                    <img src="/svg/linkrel-icon.svg" alt="icon" /> Edu.hub
                 </div>
                 <ul className="sidebar__list">
                     <li className="sidebar__list-item">
@@ -43,14 +49,14 @@ export default function SidebarComponent() {
                     </li>
                 </ul>
                 <div className="sidebar__toggle-theme">
-                    <Button className="button__toggle-theme" onClick={ handleToggleButton }>
+                    <Button className="button__toggle-theme" onClick={ buttonToggle }>
                         Темная тема
                     </Button>
                     <div className="sidebar__switch-round">
                         <label className="switch">
                             <input type="checkbox"
                                 checked={ checked } 
-                                onChange={ handleToggleButton } 
+                                onChange={ buttonToggle } 
                             />
                             <span className="switch__slider" />
                         </label>

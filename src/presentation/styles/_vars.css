@@ -15,10 +15,14 @@
     --theme-light-background-secondary: #E1E8F0;
     --theme-light-border: #FCFBFD;
 
-    --theme-light-background-active-tab: #F4F4F4;
-
     --theme-dark-background-primary: #2C2D30;
     --theme-dark-background-secondary: #101010; 
+    
+    --theme-light-tab-background-active: #F4F4F4;
+    --theme-light-tab-filter: invert(88%) sepia(0%) saturate(22%) hue-rotate(216deg) brightness(90%) contrast(101%);
+
+    --theme-dark-tab-background-active: #1A1A1A;
+    --theme-dark-tab-filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(7500%) hue-rotate(141deg) brightness(106%) contrast(104%);
 
     /* Font color variables */
     --theme-dark-color: #ffffff;
