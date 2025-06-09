@@ -11,7 +11,7 @@
 .login__container {
     width: 35%;
 
-    color: var(--theme-light-color);
+    color: var(--theme-dark-color);
 
     border-left: 1px solid var(--border);
     backdrop-filter: blur(5px);

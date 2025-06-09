@@ -12,6 +12,8 @@ export default function SidebarComponent() {
 
     const handleToggleButton = () => {
         setChecked(prevState => !prevState)
+        let mainWrapper = document.body.getElementsByClassName("main__wrapper")[0]
+        mainWrapper.classList.add("--dark-theme")
     }
 
     return (
